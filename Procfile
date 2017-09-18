@@ -1,0 +1,1 @@
+web: gunicorn efsblog2.wsgi --log-file -
