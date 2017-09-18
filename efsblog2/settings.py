@@ -26,7 +26,7 @@ SECRET_KEY = 'qcqje-05c1a3ryj@v^e@6pp@lspe^ner*tp80=h)i1r8#7&-f0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -79,8 +79,12 @@ WSGI_APPLICATION = 'efs.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd3slp5hr1k4rd9',
+        'USER': 'pvqlrkyrjpmzey',
+        'PASSWORD': '6722792eab3aa3f55a9377d9ed8611d06ddc35570c929a7d619a2f83fe09f301',
+        'HOST': 'ec2-54-243-255-57.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -139,3 +143,10 @@ DATABASES['default'].update(db_from_env)
 # https://warehouse.python.org/project/whitenoise/
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
